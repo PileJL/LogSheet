@@ -1,5 +1,6 @@
 package com.example.logsheet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -62,6 +63,12 @@ public class HomeActivity extends AppCompatActivity {
 
         // sidenav onclick
         binding.sideNav.setOnClickListener(v -> {});
+
+        // profile onclick
+        binding.profile.setOnClickListener(v -> {
+            finish();
+            startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
+        });
 
 
     }

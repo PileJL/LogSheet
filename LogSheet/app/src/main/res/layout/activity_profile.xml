@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity"
+    android:background="@drawable/profile_bg">
+
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:src="@drawable/back_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"/>
+
+    <TextView
+        android:id="@+id/pageTitle"
+        android:text="Profile"
+        app:layout_constraintTop_toBottomOf="@id/backButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="15dp"
+        style="@style/header_text_style" />
+
+    <RelativeLayout
+        android:id="@+id/userNameContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/pageTitle"
+        android:background="@drawable/soft_edge_gradient_blue"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="14dp">
+        
+        <TextView
+            android:id="@+id/headerUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Name"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:textSize="22sp"
+            android:fontFamily="@font/inter_bold_italic"
+            />
+
+    </RelativeLayout>
+
+<!--    personal information-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        app:layout_constraintTop_toBottomOf="@id/userNameContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/soft_edge_gradient_blue"
+        android:layout_marginTop="15dp"
+        android:paddingVertical="12dp">
+
+        <TextView
+            android:id="@+id/personalInformationLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Personal Information"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:textSize="15sp"
+            android:fontFamily="@font/inter_bold_italic"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="18dp"
+            />
+
+        <ImageView
+            android:id="@+id/editIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/profile_edit_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/personalInformationLabel"
+            app:layout_constraintBottom_toBottomOf="@id/personalInformationLabel"
+            android:layout_marginEnd="18dp"/>
+
+        <RelativeLayout
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#16333b"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@id/personalInformationLabel"
+            android:layout_marginHorizontal="16dp"/>
+
+<!--        username-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/username"
+            android:inputType="textPersonName"
+            android:maxLength="30"
+            android:text="User Name"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            android:paddingStart="80dp"
+            style="@style/profile_field_style" />
+
+        <TextView
+            android:text="Username:"
+            app:layout_constraintTop_toTopOf="@id/username"
+            app:layout_constraintBottom_toBottomOf="@id/username"
+            app:layout_constraintStart_toStartOf="@id/username"
+            style="@style/profile_field_label" />
+
+<!--        gender-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/gender"
+            android:inputType="text"
+            android:maxLength="10"
+            android:text="Tiger"
+            app:layout_constraintTop_toBottomOf="@id/username"
+            android:paddingStart="62dp"
+            style="@style/profile_field_style"
+            android:layout_marginTop="7dp"/>
+
+        <TextView
+            android:text="Gender:"
+            app:layout_constraintTop_toTopOf="@id/gender"
+            app:layout_constraintBottom_toBottomOf="@id/gender"
+            app:layout_constraintStart_toStartOf="@id/gender"
+            style="@style/profile_field_label" />
+
+<!--        age-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/age"
+            android:inputType="number"
+            android:maxLength="5"
+            android:text="23"
+            app:layout_constraintTop_toBottomOf="@id/gender"
+            android:paddingStart="43dp"
+            style="@style/profile_field_style"
+            android:layout_marginTop="7dp"/>
+
+        <TextView
+            android:text="Age:"
+            app:layout_constraintTop_toTopOf="@id/age"
+            app:layout_constraintBottom_toBottomOf="@id/age"
+            app:layout_constraintStart_toStartOf="@id/age"
+            style="@style/profile_field_label" />
+
+<!--        Height-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/height"
+            android:inputType="number"
+            android:maxLength="5"
+            android:text="160"
+            app:layout_constraintTop_toBottomOf="@id/age"
+            android:paddingStart="87dp"
+            style="@style/profile_field_style"
+            android:layout_marginTop="7dp"/>
+
+        <TextView
+            android:text="Height (cm):"
+            app:layout_constraintTop_toTopOf="@id/height"
+            app:layout_constraintBottom_toBottomOf="@id/height"
+            app:layout_constraintStart_toStartOf="@id/height"
+            style="@style/profile_field_label" />
+
+        <!--        Weight-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/weight"
+            android:inputType="number"
+            android:maxLength="10"
+            android:text="50"
+            app:layout_constraintTop_toBottomOf="@id/height"
+            android:paddingStart="87dp"
+            style="@style/profile_field_style"
+            android:layout_marginTop="7dp"/>
+
+        <TextView
+            android:text="Weight (kg):"
+            app:layout_constraintTop_toTopOf="@id/weight"
+            app:layout_constraintBottom_toBottomOf="@id/weight"
+            app:layout_constraintStart_toStartOf="@id/weight"
+            style="@style/profile_field_label" />
+
+<!--        BMI-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bmiContainer"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="18dp"
+            android:background="@drawable/profile_fields_shape"
+            app:layout_constraintTop_toBottomOf="@id/weight"
+            android:layout_marginTop="7dp"/>
+
+        <TextView
+            android:id="@+id/bmiLabel"
+            android:text="BMI:"
+            app:layout_constraintTop_toTopOf="@id/bmiContainer"
+            app:layout_constraintBottom_toBottomOf="@id/bmiContainer"
+            app:layout_constraintStart_toStartOf="@id/bmiContainer"
+            style="@style/profile_field_label" />
+        
+        <TextView
+            android:id="@+id/computedBMI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:textSize="13sp"
+            android:text="19.5"
+            android:fontFamily="@font/inter_regular"
+            app:layout_constraintStart_toEndOf="@id/bmiLabel"
+            app:layout_constraintTop_toTopOf="@id/bmiLabel"
+            app:layout_constraintBottom_toBottomOf="@id/bmiLabel"
+            android:layout_marginStart="5dp"/>
+
+        <TextView
+            android:id="@+id/bmiInterpretation"
+            android:text="(Normal)"
+            app:layout_constraintTop_toTopOf="@id/computedBMI"
+            app:layout_constraintBottom_toBottomOf="@id/computedBMI"
+            app:layout_constraintStart_toEndOf="@id/computedBMI"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/inter_italic"
+            style="@style/profile_field_label" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveButton"
+            android:text="Save"
+            android:layout_height="35dp"
+            app:layout_constraintTop_toBottomOf="@id/bmiInterpretation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            style="@style/main_button_style"
+            android:visibility="gone"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
