@@ -12,17 +12,17 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.logsheet.Utilities.Utility;
-import com.example.logsheet.databinding.ActivitySignupBinding;
+import com.example.logsheet.databinding.ActivityLogsPageBinding;
 
-public class SignupActivity extends AppCompatActivity {
+public class LogsPage extends AppCompatActivity {
 
-    ActivitySignupBinding binding;
+    ActivityLogsPageBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        binding = ActivitySignupBinding.inflate(getLayoutInflater());
+        binding = ActivityLogsPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -33,21 +33,39 @@ public class SignupActivity extends AppCompatActivity {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                goToLoginPage();
+                goToHomePage();
             }
         };
         // Add the callback to the OnBackPressedDispatcher
         getOnBackPressedDispatcher().addCallback(this, callback);
 
-        // backbuton onclick
-        binding.backButton.setOnClickListener(v -> {
-            goToLoginPage();
+        // overlay onclick
+        binding.overlay.setOnClickListener(v -> binding.overlay.setVisibility(View.GONE));
+
+        // hamburger icon onclick
+        binding.hamburgerIcon.setOnClickListener(v -> binding.overlay.setVisibility(View.VISIBLE));
+
+        // sidenav onclick
+        binding.sideNav.setOnClickListener(v -> {});
+
+        // home onclick
+        binding.home.setOnClickListener(v -> {
+            Utility.navigateToActivity(this, new Intent(this, HomeActivity.class));
+            finish();
+        });
+
+        // profile onclick
+        binding.profile.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            intent.putExtra("backActivity", LogsPage.class.getName());
+            Utility.navigateToActivity(this, intent);
+            finish();
         });
 
     }
 
-    private void goToLoginPage() {
-        Utility.navigateToActivity(this, new Intent(this, LoginActivity.class));
+    private void goToHomePage() {
+        Utility.navigateToActivity(this, new Intent(this, HomeActivity.class));
         finish();
     }
 }

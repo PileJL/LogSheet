@@ -20,6 +20,7 @@ import java.util.Arrays;
 public class ProfileActivity extends AppCompatActivity {
 
     ActivityProfileBinding binding;
+    Class<?> backActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                goToLoginPage();
+                goBackToPreviousPage();
             }
         };
         // Add the callback to the OnBackPressedDispatcher
@@ -45,8 +46,15 @@ public class ProfileActivity extends AppCompatActivity {
 
         // backbuton onclick
         binding.backButton.setOnClickListener(v -> {
-            goToLoginPage();
+            goBackToPreviousPage();
         });
+
+        Intent intent = getIntent();
+        try {
+            backActivity = Class.forName(intent.getStringExtra("backActivity"));
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         //edit icon onclick
         binding.editIcon.setOnClickListener(v -> {
@@ -63,13 +71,14 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    private void goToLoginPage() {
+    private void goBackToPreviousPage() {
+        Utility.navigateToActivity(this, new Intent(this, backActivity));
         finish();
-        startActivity(new Intent(ProfileActivity.this, HomeActivity.class));
     }
 
     private void saveProfile() {
         binding.saveButton.setVisibility(View.GONE);
         Utility.disableTextInputEditTexts(new ArrayList<>(Arrays.asList(binding.username, binding.gender, binding.age, binding.height, binding.weight)));
+        this.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

@@ -14,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.logsheet.Utilities.Utility;
 import com.example.logsheet.databinding.ActivityHomeBinding;
 
 import java.util.ArrayList;
@@ -66,12 +67,20 @@ public class HomeActivity extends AppCompatActivity {
 
         // profile onclick
         binding.profile.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            intent.putExtra("backActivity", HomeActivity.class.getName());
+            Utility.navigateToActivity(this, intent);
             finish();
-            startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
         });
 
-
+        // logs onclick
+        binding.logs.setOnClickListener(v -> {
+            Utility.navigateToActivity(this, new Intent(this, LogsPage.class));
+            finish();
+        });
     }
+
+
 
     private void filterActivities(String query, ArrayList<ConstraintLayout> activityContainers, ArrayList<TextView> activityTitles) {
         for (int i = 0; i < activityContainers.size(); i++) {

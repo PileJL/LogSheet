@@ -10,6 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.logsheet.Utilities.Utility;
 import com.example.logsheet.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
@@ -29,14 +30,14 @@ public class LoginActivity extends AppCompatActivity {
         });
         // signup text onclick
         binding.signupText.setOnClickListener(v -> {
+            Utility.navigateToActivity(this, new Intent(this, SignupActivity.class));
             finish();
-            startActivity(new Intent(LoginActivity.this, SignupActivity.class));
         });
 
         // login onclick
         binding.loginButton.setOnClickListener(v -> {
+            Utility.navigateToActivity(this, new Intent(this, HomeActivity.class));
             finish();
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
         });
     }
 }
