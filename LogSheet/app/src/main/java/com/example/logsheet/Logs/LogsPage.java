@@ -1,8 +1,9 @@
-package com.example.logsheet;
+package com.example.logsheet.Logs;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
@@ -10,11 +11,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.logsheet.HomeActivity;
+import com.example.logsheet.ProfileActivity;
+import com.example.logsheet.R;
 import com.example.logsheet.Utilities.Utility;
 import com.example.logsheet.databinding.ActivityLogsPageBinding;
 
-public class LogsPage extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class LogsPage extends AppCompatActivity implements LogsSelectListener{
 
     ActivityLogsPageBinding binding;
 
@@ -62,10 +70,38 @@ public class LogsPage extends AppCompatActivity {
             finish();
         });
 
+        List<LogsItem> items = new ArrayList<LogsItem>();
+        items.add(new LogsItem("February 2021 - Week 1", "Highly Active"));
+        items.add(new LogsItem("February 2021 - Week 2", "Inactive"));
+        items.add(new LogsItem("February 2021 - Week 1", "Low Activity"));
+        items.add(new LogsItem("February 2021 - Week 2", "Moderate Activity"));
+        items.add(new LogsItem("February 2021 - Week 1", "Highly Active"));
+        items.add(new LogsItem("February 2021 - Week 2", "Inactive"));
+        items.add(new LogsItem("February 2021 - Week 1", "Low Activity"));
+        items.add(new LogsItem("February 2021 - Week 2", "Moderate Activity"));
+        items.add(new LogsItem("February 2021 - Week 1", "Highly Active"));
+        items.add(new LogsItem("February 2021 - Week 2", "Inactive"));
+        items.add(new LogsItem("February 2021 - Week 1", "Low Activity"));
+        items.add(new LogsItem("February 2021 - Week 2", "Moderate Activity"));
+        items.add(new LogsItem("February 2021 - Week 1", "Highly Active"));
+        items.add(new LogsItem("February 2021 - Week 2", "Inactive"));
+        items.add(new LogsItem("February 2021 - Week 1", "Low Activity"));
+        items.add(new LogsItem("February 2021 - Week 2", "Moderate Activity"));
+        items.add(new LogsItem("February 2021 - Week 22", "Active"));
+
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setAdapter(new LogsAdapter(this, items, this));
+
     }
 
     private void goToHomePage() {
         Utility.navigateToActivity(this, new Intent(this, HomeActivity.class));
         finish();
+    }
+
+
+    @Override
+    public void onItemClicked(LogsItem item) {
+        Toast.makeText(this, item.getActiveness(), Toast.LENGTH_SHORT).show();
     }
 }

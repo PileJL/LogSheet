@@ -13,7 +13,7 @@
         android:theme="@style/Theme.LogSheet"
         tools:targetApi="31">
         <activity
-            android:name=".LogsPage"
+            android:name=".Logs.LogsPage"
             android:exported="true" />
         <activity
             android:name=".ProfileActivity"

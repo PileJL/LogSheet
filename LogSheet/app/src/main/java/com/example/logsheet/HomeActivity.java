@@ -14,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.logsheet.Logs.LogsPage;
 import com.example.logsheet.Utilities.Utility;
 import com.example.logsheet.databinding.ActivityHomeBinding;
 
