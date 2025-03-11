@@ -13,10 +13,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.logsheet.DayLogs.DayLogsPage;
 import com.example.logsheet.HomeActivity;
 import com.example.logsheet.ProfileActivity;
 import com.example.logsheet.R;
 import com.example.logsheet.Utilities.Utility;
+import com.example.logsheet.WeekLogs;
 import com.example.logsheet.databinding.ActivityLogsPageBinding;
 
 import java.util.ArrayList;
@@ -102,6 +104,6 @@ public class LogsPage extends AppCompatActivity implements LogsSelectListener{
 
     @Override
     public void onItemClicked(LogsItem item) {
-        Toast.makeText(this, item.getActiveness(), Toast.LENGTH_SHORT).show();
+        Utility.navigateToActivity(this, new Intent(this, WeekLogs.class));
     }
 }
