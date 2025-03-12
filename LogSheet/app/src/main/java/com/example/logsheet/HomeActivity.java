@@ -79,6 +79,12 @@ public class HomeActivity extends AppCompatActivity {
             Utility.navigateToActivity(this, new Intent(this, LogsPage.class));
             finish();
         });
+
+        // notifOkayButton onClick
+        binding.notifOkayButton.setOnClickListener(v -> binding.notifOverlay.setVisibility(View.GONE));
+
+        // triviaCloseButton onClick
+        binding.triviaCloseButton.setOnClickListener(v -> binding.triviaOverlay.setVisibility(View.GONE));
     }
 
 
