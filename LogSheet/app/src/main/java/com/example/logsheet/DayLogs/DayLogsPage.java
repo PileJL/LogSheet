@@ -2,6 +2,7 @@ package com.example.logsheet.DayLogs;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
@@ -11,6 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.logsheet.LogDetailsPage;
 import com.example.logsheet.R;
 import com.example.logsheet.Utilities.Utility;
 import com.example.logsheet.WeekLogs;
@@ -19,7 +21,7 @@ import com.example.logsheet.databinding.ActivityDayLogsBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DayLogsPage extends AppCompatActivity {
+public class DayLogsPage extends AppCompatActivity implements DayLogsSelectListener{
 
     ActivityDayLogsBinding binding;
 
@@ -67,7 +69,7 @@ public class DayLogsPage extends AppCompatActivity {
         items.add(new DayLogsItem("Boxing", "Vigorous", "1h 30m"));
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        binding.recyclerView.setAdapter(new DayLogsAdapter(this, items));
+        binding.recyclerView.setAdapter(new DayLogsAdapter(this, items, this));
 
 
     }
@@ -75,5 +77,10 @@ public class DayLogsPage extends AppCompatActivity {
     private void goToWeekLogs() {
         Utility.navigateToActivity(this, new Intent(this, WeekLogs.class));
         finish();
+    }
+
+    @Override
+    public void onItemClicked(DayLogsItem item) {
+        Utility.navigateToActivity(this, new Intent(this, LogDetailsPage.class));
     }
 }

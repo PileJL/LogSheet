@@ -2,6 +2,7 @@ package com.example.logsheet.DayLogs;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -16,10 +17,12 @@ import java.util.List;
 public class DayLogsAdapter extends RecyclerView.Adapter<DayLogsViewHolder> {
 
     Context context;
+    DayLogsSelectListener listener;
 
-    public DayLogsAdapter(Context context, List<DayLogsItem> items) {
+    public DayLogsAdapter(Context context, List<DayLogsItem> items, DayLogsSelectListener listener) {
         this.context = context;
         this.items = items;
+        this.listener = listener;
     }
 
     List<DayLogsItem> items;
@@ -34,6 +37,7 @@ public class DayLogsAdapter extends RecyclerView.Adapter<DayLogsViewHolder> {
     public void onBindViewHolder(@NonNull DayLogsViewHolder holder, int position) {
         holder.title.setText(items.get(position).getTitle());
         holder.duration.setText(items.get(position).getDuration());
+        holder.intensity.setText(items.get(position).getIntensity());
 
         // change color of intensity based on passed value
         if (items.get(position).getIntensity().equalsIgnoreCase("Light")) {
@@ -45,6 +49,9 @@ public class DayLogsAdapter extends RecyclerView.Adapter<DayLogsViewHolder> {
         else if (items.get(position).getIntensity().equalsIgnoreCase("Vigorous")) {
             holder.intensity.setTextColor(ContextCompat.getColor(context, R.color.green));
         }
+
+        // set onclick of item
+        holder.itemContainer.setOnClickListener(v -> listener.onItemClicked(items.get(position)));
     }
 
     @Override

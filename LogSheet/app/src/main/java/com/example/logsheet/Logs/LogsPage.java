@@ -22,6 +22,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.logsheet.AssessmentPage;
 import com.example.logsheet.DayLogs.DayLogsPage;
 import com.example.logsheet.HomeActivity;
 import com.example.logsheet.ProfileActivity;
@@ -82,10 +83,21 @@ public class LogsPage extends AppCompatActivity implements LogsSelectListener{
         });
 
         // emoticonNextButton onclick
-        binding.emoticonNextButton.setOnClickListener(v -> displayAddLogForm());
+        binding.formButton.setOnClickListener(v -> formButonOnClick());
+
+        setUpSpinner();
 
         // addLog button onclick
         binding.addLogButton.setOnClickListener(v -> addLog());
+
+        // overlayBG onclick
+        binding.addLogOverlay.setOnClickListener(v -> binding.addLogOverlay.setVisibility(View.GONE));
+
+        // addLog popup onclick
+        binding.addLogContainer.setOnClickListener(v -> {});
+
+        // addLog backButton onclick
+        binding.addLogBackButton.setOnClickListener(v -> displayAddLogPage1());
 
         List<LogsItem> items = new ArrayList<LogsItem>();
         items.add(new LogsItem("February 2021 - Week 1", "Highly Active"));
@@ -109,23 +121,11 @@ public class LogsPage extends AppCompatActivity implements LogsSelectListener{
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(new LogsAdapter(this, items, this));
 
-        setUpSpinner();
-
     }
 
     private void addLog() {
-
-    }
-
-    private void displayAddLogForm() {
-        binding.formTitle.setText("Add Log"); // change form title
-        binding.emotionContainer.setVisibility(View.GONE); // hide emoticons
-        // change navigation lines colors
-        binding.line1.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
-        binding.line2.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.main_yellow));
-        // display backbutton
-        binding.addLogBackButton.setVisibility(View.VISIBLE);
-
+        binding.addLogOverlay.setVisibility(View.VISIBLE);
+        displayAddLogPage1();
     }
 
     private void goToHomePage() {
@@ -171,4 +171,34 @@ public class LogsPage extends AppCompatActivity implements LogsSelectListener{
         Utility.navigateToActivity(this, new Intent(this, WeekLogs.class));
     }
 
+    private void displayAddLogPage1() {
+        binding.addLogBackButton.setVisibility(View.GONE); // hide backButton
+        binding.formTitle.setText("How are you feeling\ntoday?"); // change form title
+        binding.emotionContainer.setVisibility(View.VISIBLE); // display emoticons
+        // change navigation lines colors
+        binding.line1.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.yellow));
+        binding.line2.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+        // hide physical activity form
+        binding.activityFormContainer.setVisibility(View.GONE);
+        // set button text
+        binding.formButton.setText("Next");
+    }
+
+    private void formButonOnClick() {
+        if (binding.formButton.getText().toString().equalsIgnoreCase("Next")) {
+            binding.addLogBackButton.setVisibility(View.VISIBLE); // display backButton
+            binding.formTitle.setText("Add Log"); // change form title
+            binding.emotionContainer.setVisibility(View.GONE); // hide emoticons
+            // change navigation lines colors
+            binding.line1.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+            binding.line2.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.yellow));
+            // hide physical activity form
+            binding.activityFormContainer.setVisibility(View.VISIBLE);
+            // set button text
+            binding.formButton.setText("Submit");
+        }
+        else {
+            Utility.navigateToActivity(this, new Intent(this, AssessmentPage.class));
+        }
+    }
 }

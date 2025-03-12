@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Logs.LogsPage"
-    android:background="@color/home_page_bg_color">
+    android:background="@drawable/sub_bg">
 
 <!--    side nav overlay-->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -199,10 +199,10 @@
         app:layout_constraintStart_toStartOf="parent"
         android:background="@color/overlay_color"
         android:elevation="1dp"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/emotionPopup"
+            android:id="@+id/addLogContainer"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
             android:background="@drawable/gradient_blue_no_shadow"
@@ -235,228 +235,248 @@
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:fontFamily="@font/poppins_bold"
-                android:textSize="19sp"
-                android:layout_marginTop="5dp"/>
-<!--            emoticons-->
+                android:textSize="20sp"
+                android:layout_marginTop="8dp"/>
+
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/emotionContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/popContentContainer"
                 app:layout_constraintTop_toBottomOf="@id/formTitle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="15dp"
-                android:visibility="gone">
-<!--                sad-->
-                <ImageView
-                    android:id="@+id/sad"
-                    android:src="@drawable/sad"
-                    style="@style/emoticon_style"
-                    app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <!--            emoticons-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/emotionContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="0dp"/>
-                <TextView
-                    android:text="Sad"
-                    app:layout_constraintStart_toStartOf="@id/sad"
-                    app:layout_constraintEnd_toEndOf="@id/sad"
-                    style="@style/emoticon_label_style" />
-<!--                happy-->
-                <ImageView
-                    android:id="@+id/happy"
-                    android:src="@drawable/happy"
-                    style="@style/emoticon_style"
-                    app:layout_constraintStart_toEndOf="@id/sad"
-                    app:layout_constraintTop_toTopOf="@id/sad"/>
-                <TextView
-                    android:text="Happy"
-                    app:layout_constraintStart_toStartOf="@id/happy"
-                    app:layout_constraintEnd_toEndOf="@id/happy"
-                    style="@style/emoticon_label_style" />
-<!--                tired-->
-                <ImageView
-                    android:id="@+id/tired"
-                    android:src="@drawable/tired"
-                    style="@style/emoticon_style"
-                    app:layout_constraintStart_toEndOf="@id/happy"
-                    app:layout_constraintTop_toTopOf="@id/sad"/>
-                <TextView
-                    android:text="Tired"
-                    app:layout_constraintStart_toStartOf="@id/tired"
-                    app:layout_constraintEnd_toEndOf="@id/tired"
-                    style="@style/emoticon_label_style" />
-<!--                loved-->
-                <ImageView
-                    android:id="@+id/loved"
-                    android:src="@drawable/loved"
-                    style="@style/emoticon_style"
-                    app:layout_constraintStart_toEndOf="@id/tired"
-                    app:layout_constraintTop_toTopOf="@id/sad"/>
-                <TextView
-                    android:text="Loved"
-                    app:layout_constraintStart_toStartOf="@id/loved"
-                    app:layout_constraintEnd_toEndOf="@id/loved"
-                    style="@style/emoticon_label_style" />
-<!--                sleepy-->
-                <ImageView
-                    android:id="@+id/sleepy"
-                    android:src="@drawable/sleepy"
-                    style="@style/emoticon_style"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/sad"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="28dp"/>
-                <TextView
-                    android:text="Sleepy"
-                    app:layout_constraintTop_toBottomOf="@id/sleepy"
-                    app:layout_constraintStart_toStartOf="@id/sleepy"
-                    app:layout_constraintEnd_toEndOf="@id/sleepy"
-                    style="@style/emoticon_label_style" />
-<!--                awkward-->
-                <ImageView
-                    android:id="@+id/awkward"
-                    android:src="@drawable/awkward"
-                    style="@style/emoticon_style"
-                    app:layout_constraintStart_toEndOf="@id/sleepy"
-                    app:layout_constraintTop_toTopOf="@id/sleepy"/>
-                <TextView
-                    android:text="Awkward"
-                    app:layout_constraintTop_toBottomOf="@id/awkward"
-                    app:layout_constraintStart_toStartOf="@id/awkward"
-                    app:layout_constraintEnd_toEndOf="@id/awkward"
-                    style="@style/emoticon_label_style" />
-<!--                strong-->
-                <ImageView
-                    android:id="@+id/strong"
-                    android:src="@drawable/strong"
-                    style="@style/emoticon_style"
-                    app:layout_constraintStart_toEndOf="@id/awkward"
-                    app:layout_constraintTop_toTopOf="@id/sleepy"/>
-                <TextView
-                    android:text="Strong"
-                    app:layout_constraintTop_toBottomOf="@id/strong"
-                    app:layout_constraintStart_toStartOf="@id/strong"
-                    app:layout_constraintEnd_toEndOf="@id/strong"
-                    style="@style/emoticon_label_style" />
-<!--                angry-->
-                <ImageView
-                    android:id="@+id/angry"
-                    android:src="@drawable/angry"
-                    style="@style/emoticon_style"
-                    app:layout_constraintStart_toEndOf="@id/strong"
-                    app:layout_constraintTop_toTopOf="@id/strong"/>
-                <TextView
-                    android:text="Angry"
-                    app:layout_constraintTop_toBottomOf="@id/angry"
-                    app:layout_constraintStart_toStartOf="@id/angry"
-                    app:layout_constraintEnd_toEndOf="@id/angry"
-                    style="@style/emoticon_label_style" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="15dp"
+                    android:visibility="gone">
+                    <!--                sad-->
+                    <ImageView
+                        android:id="@+id/sad"
+                        android:src="@drawable/sad"
+                        style="@style/emoticon_style"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="0dp"/>
+                    <TextView
+                        android:text="Sad"
+                        app:layout_constraintStart_toStartOf="@id/sad"
+                        app:layout_constraintEnd_toEndOf="@id/sad"
+                        style="@style/emoticon_label_style" />
+                    <!--                happy-->
+                    <ImageView
+                        android:id="@+id/happy"
+                        android:src="@drawable/happy"
+                        style="@style/emoticon_style"
+                        app:layout_constraintStart_toEndOf="@id/sad"
+                        app:layout_constraintTop_toTopOf="@id/sad"/>
+                    <TextView
+                        android:text="Happy"
+                        app:layout_constraintStart_toStartOf="@id/happy"
+                        app:layout_constraintEnd_toEndOf="@id/happy"
+                        style="@style/emoticon_label_style" />
+                    <!--                tired-->
+                    <ImageView
+                        android:id="@+id/tired"
+                        android:src="@drawable/tired"
+                        style="@style/emoticon_style"
+                        app:layout_constraintStart_toEndOf="@id/happy"
+                        app:layout_constraintTop_toTopOf="@id/sad"/>
+                    <TextView
+                        android:text="Tired"
+                        app:layout_constraintStart_toStartOf="@id/tired"
+                        app:layout_constraintEnd_toEndOf="@id/tired"
+                        style="@style/emoticon_label_style" />
+                    <!--                loved-->
+                    <ImageView
+                        android:id="@+id/loved"
+                        android:src="@drawable/loved"
+                        style="@style/emoticon_style"
+                        app:layout_constraintStart_toEndOf="@id/tired"
+                        app:layout_constraintTop_toTopOf="@id/sad"/>
+                    <TextView
+                        android:text="Loved"
+                        app:layout_constraintStart_toStartOf="@id/loved"
+                        app:layout_constraintEnd_toEndOf="@id/loved"
+                        style="@style/emoticon_label_style" />
+                    <!--                sleepy-->
+                    <ImageView
+                        android:id="@+id/sleepy"
+                        android:src="@drawable/sleepy"
+                        style="@style/emoticon_style"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/sad"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="28dp"/>
+                    <TextView
+                        android:text="Sleepy"
+                        app:layout_constraintTop_toBottomOf="@id/sleepy"
+                        app:layout_constraintStart_toStartOf="@id/sleepy"
+                        app:layout_constraintEnd_toEndOf="@id/sleepy"
+                        style="@style/emoticon_label_style" />
+                    <!--                awkward-->
+                    <ImageView
+                        android:id="@+id/awkward"
+                        android:src="@drawable/awkward"
+                        style="@style/emoticon_style"
+                        app:layout_constraintStart_toEndOf="@id/sleepy"
+                        app:layout_constraintTop_toTopOf="@id/sleepy"/>
+                    <TextView
+                        android:text="Awkward"
+                        app:layout_constraintTop_toBottomOf="@id/awkward"
+                        app:layout_constraintStart_toStartOf="@id/awkward"
+                        app:layout_constraintEnd_toEndOf="@id/awkward"
+                        style="@style/emoticon_label_style" />
+                    <!--                strong-->
+                    <ImageView
+                        android:id="@+id/strong"
+                        android:src="@drawable/strong"
+                        style="@style/emoticon_style"
+                        app:layout_constraintStart_toEndOf="@id/awkward"
+                        app:layout_constraintTop_toTopOf="@id/sleepy"/>
+                    <TextView
+                        android:text="Strong"
+                        app:layout_constraintTop_toBottomOf="@id/strong"
+                        app:layout_constraintStart_toStartOf="@id/strong"
+                        app:layout_constraintEnd_toEndOf="@id/strong"
+                        style="@style/emoticon_label_style" />
+                    <!--                angry-->
+                    <ImageView
+                        android:id="@+id/angry"
+                        android:src="@drawable/angry"
+                        style="@style/emoticon_style"
+                        app:layout_constraintStart_toEndOf="@id/strong"
+                        app:layout_constraintTop_toTopOf="@id/strong"/>
+                    <TextView
+                        android:text="Angry"
+                        app:layout_constraintTop_toBottomOf="@id/angry"
+                        app:layout_constraintStart_toStartOf="@id/angry"
+                        app:layout_constraintEnd_toEndOf="@id/angry"
+                        style="@style/emoticon_label_style" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!--            add log form-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/activityFormContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+                    <!--            activity description-->
+
+                    <TextView
+                        android:id="@+id/actDescLabel"
+                        android:text="Activity Description:"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/actDesc"
+                        android:layout_marginTop="10dp"
+                        style="@style/add_log_label_style" />
+
+                    <EditText
+                        android:id="@+id/actDesc"
+                        app:layout_constraintTop_toBottomOf="@id/actDescLabel"
+                        android:hint="Activity Description..."
+                        style="@style/add_log_field_style"
+                        android:maxLength="150"/>
+                    <!--            duration-->
+                    <TextView
+                        android:id="@+id/durationLabel"
+                        android:text="Duration:"
+                        app:layout_constraintTop_toBottomOf="@id/actDesc"
+                        app:layout_constraintStart_toStartOf="@id/hour"
+                        android:layout_marginTop="5dp"
+                        style="@style/add_log_label_style" />
+
+                    <EditText
+                        android:id="@+id/hour"
+                        app:layout_constraintTop_toBottomOf="@id/durationLabel"
+                        android:layout_width="70dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:hint="Hour"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        style="@style/add_log_field_style"
+                        />
+
+                    <TextView
+                        android:id="@+id/colon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text=":"
+                        app:layout_constraintTop_toTopOf="@id/hour"
+                        app:layout_constraintStart_toEndOf="@id/hour"
+                        app:layout_constraintBottom_toBottomOf="@id/hour"
+                        android:layout_marginStart="5dp"/>
+
+                    <EditText
+                        android:id="@+id/minute"
+                        app:layout_constraintTop_toBottomOf="@id/durationLabel"
+                        android:layout_width="70dp"
+                        app:layout_constraintStart_toEndOf="@id/colon"
+                        android:hint="Minute"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:layout_marginStart="5dp"
+                        style="@style/add_log_field_style"/>
+                    <!--            intensity-->
+                    <TextView
+                        android:id="@+id/intensityLabel"
+                        android:text="Intensity:"
+                        app:layout_constraintTop_toBottomOf="@id/hour"
+                        app:layout_constraintStart_toStartOf="@id/actDesc"
+                        android:layout_marginTop="5dp"
+                        style="@style/add_log_label_style" />
+
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:background="@drawable/white_field"
+                        app:layout_constraintTop_toBottomOf="@id/intensityLabel"
+                        android:layout_marginTop="1dp"
+                        android:popupBackground="@drawable/white_field"
+                        android:spinnerMode="dropdown"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-<!--            add log form-->
-<!--            activity description-->
-            <TextView
-                android:id="@+id/actDescLabel"
-                android:text="Activity Description:"
-                app:layout_constraintTop_toBottomOf="@id/formTitle"
-                app:layout_constraintStart_toStartOf="@id/actDesc"
-                android:layout_marginTop="10dp"
-                style="@style/add_log_label_style" />
-
-            <EditText
-                android:id="@+id/actDesc"
-                app:layout_constraintTop_toBottomOf="@id/actDescLabel"
-                android:hint="Activity Description..."
-                style="@style/add_log_field_style" />
-<!--            duration-->
-            <TextView
-                android:id="@+id/durationLabel"
-                android:text="Duration:"
-                app:layout_constraintTop_toBottomOf="@id/actDesc"
-                app:layout_constraintStart_toStartOf="@id/hour"
-                android:layout_marginTop="5dp"
-                style="@style/add_log_label_style" />
-
-            <EditText
-                android:id="@+id/hour"
-                app:layout_constraintTop_toBottomOf="@id/durationLabel"
-                android:layout_width="70dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:hint="Hour"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="2"
-                style="@style/add_log_field_style"
-                />
-
-            <TextView
-                android:id="@+id/colon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:fontFamily="@font/inter_bold"
-                android:text=":"
-                app:layout_constraintTop_toTopOf="@id/hour"
-                app:layout_constraintStart_toEndOf="@id/hour"
-                app:layout_constraintBottom_toBottomOf="@id/hour"
-                android:layout_marginStart="5dp"/>
-
-            <EditText
-                android:id="@+id/minute"
-                app:layout_constraintTop_toBottomOf="@id/durationLabel"
-                android:layout_width="70dp"
-                app:layout_constraintStart_toEndOf="@id/colon"
-                android:hint="Minute"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="2"
-                android:layout_marginStart="5dp"
-                style="@style/add_log_field_style"/>
-<!--            intensity-->
-            <!--            activity description-->
-            <TextView
-                android:id="@+id/intensityLabel"
-                android:text="Intensity:"
-                app:layout_constraintTop_toBottomOf="@id/hour"
-                app:layout_constraintStart_toStartOf="@id/actDesc"
-                android:layout_marginTop="5dp"
-                style="@style/add_log_label_style" />
-
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginHorizontal="20dp"
-                android:background="@drawable/white_field"
-                app:layout_constraintTop_toBottomOf="@id/intensityLabel"
-                android:layout_marginTop="1dp"
-                android:popupBackground="@drawable/white_field"
-                android:spinnerMode="dropdown"
-                />
 
             <!--                next button-->
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/emoticonNextButton"
-                android:layout_height="35dp"
-                android:layout_width="100dp"
-                android:text="Next"
-                app:layout_constraintTop_toBottomOf="@id/emotionContainer"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_margin="30dp"
-                android:textSize="14sp"
+                android:id="@+id/formButton"
                 style="@style/main_button_style"
-                android:visibility="gone"/>
+                android:layout_width="90dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="28dp"
+                android:text="Next"
+                android:textSize="14sp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/popContentContainer" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@id/emoticonNextButton"
-                app:layout_constraintEnd_toEndOf="@id/emoticonNextButton"
-                app:layout_constraintTop_toBottomOf="@id/emoticonNextButton"
+                app:layout_constraintStart_toStartOf="@id/formButton"
+                app:layout_constraintEnd_toEndOf="@id/formButton"
+                app:layout_constraintTop_toBottomOf="@id/formButton"
                 android:layout_marginTop="20dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 >
                 <RelativeLayout
                     android:id="@+id/line1"
@@ -483,15 +503,15 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="30dp"/>
 
-    <ImageView
-        android:id="@+id/notifIcon"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/bell"
-        app:layout_constraintTop_toTopOf="@id/hamburgerIcon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/hamburgerIcon"
-        android:layout_marginEnd="30dp"/>
+<!--    <ImageView-->
+<!--        android:id="@+id/notifIcon"-->
+<!--        android:layout_width="25dp"-->
+<!--        android:layout_height="25dp"-->
+<!--        android:src="@drawable/bell"-->
+<!--        app:layout_constraintTop_toTopOf="@id/hamburgerIcon"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/hamburgerIcon"-->
+<!--        android:layout_marginEnd="30dp"/>-->
 
     <TextView
         android:id="@+id/pageTitle"
