@@ -445,7 +445,7 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/vidImage1"
-                    android:src="@drawable/video_sample_image"
+                    android:src="@drawable/cycling"
                     app:layout_constraintTop_toTopOf="parent"
                     style="@style/activity_image_style" />
 
@@ -461,13 +461,13 @@
 
                 <TextView
                     android:id="@+id/activityTitle1"
-                    android:text="Jogging"
+                    android:text="Cycling"
                     app:layout_constraintTop_toBottomOf="@id/vidImage1"
                     app:layout_constraintStart_toStartOf="parent"
                     style="@style/activity_title_style" />
 
                 <TextView
-                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    android:text="Cycling improves cardiovascular health, strengthens leg muscles, and enhances endurance while being a low-impact exercise that's easy on the joints. It also helps burn calories, boosts mental well-being, and is an eco-friendly mode of transportation."
                     app:layout_constraintTop_toBottomOf="@id/activityTitle1"
                     style="@style/activity_desc_style" />
 
@@ -482,7 +482,7 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/vidImage2"
-                    android:src="@drawable/video_sample_image"
+                    android:src="@drawable/dancing"
                     app:layout_constraintTop_toTopOf="parent"
                     style="@style/activity_image_style" />
 
@@ -498,13 +498,13 @@
 
                 <TextView
                     android:id="@+id/activityTitle2"
-                    android:text="Running"
+                    android:text="Dancing"
                     app:layout_constraintTop_toBottomOf="@id/vidImage2"
                     app:layout_constraintStart_toStartOf="parent"
                     style="@style/activity_title_style" />
 
                 <TextView
-                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    android:text="Dancing improves health, enhances coordination, and strengthens muscles while increasing flexibility and balance. It also boosts mood, reduces stress, and is a fun way to stay active."
                     app:layout_constraintTop_toBottomOf="@id/activityTitle2"
                     style="@style/activity_desc_style" />
 
@@ -519,7 +519,7 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/vidImage3"
-                    android:src="@drawable/video_sample_image"
+                    android:src="@drawable/jogging"
                     app:layout_constraintTop_toTopOf="parent"
                     style="@style/activity_image_style" />
 
@@ -535,18 +535,305 @@
 
                 <TextView
                     android:id="@+id/activityTitle3"
-                    android:text="Walking"
+                    android:text="Jogging"
                     app:layout_constraintTop_toBottomOf="@id/vidImage3"
                     app:layout_constraintStart_toStartOf="parent"
                     style="@style/activity_title_style" />
 
                 <TextView
-                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    android:text="Jogging keeps your heart strong, helps burn calories, and strengthens your legs. It also reduces stress and boosts your energy."
                     app:layout_constraintTop_toBottomOf="@id/activityTitle3"
                     style="@style/activity_desc_style" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            activity 4-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/activity4"
+                app:layout_constraintTop_toBottomOf="@id/activity3"
+                android:layout_marginTop="10dp"
+                style="@style/activity_box_style">
 
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/vidImage4"
+                    android:src="@drawable/jumping_jacks"
+                    app:layout_constraintTop_toTopOf="parent"
+                    style="@style/activity_image_style" />
+
+                <ImageView
+                    android:id="@+id/playButton4"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/play_button"
+                    app:layout_constraintTop_toTopOf="@id/vidImage4"
+                    app:layout_constraintBottom_toBottomOf="@id/vidImage4"
+                    app:layout_constraintStart_toStartOf="@id/vidImage4"
+                    app:layout_constraintEnd_toEndOf="@id/vidImage4"/>
+
+                <TextView
+                    android:id="@+id/activityTitle4"
+                    android:text="Jumping Jacks"
+                    app:layout_constraintTop_toBottomOf="@id/vidImage4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/activity_title_style" />
+
+                <TextView
+                    android:text="Jumping jacks improve cardiovascular health, burn calories, and strengthen muscles while enhancing coordination and flexibility. They are a simple, full-body exercise that boosts endurance, reduces stress, and requires no equipment."
+                    app:layout_constraintTop_toBottomOf="@id/activityTitle4"
+                    style="@style/activity_desc_style" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            activity 5-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/activity5"
+                app:layout_constraintTop_toBottomOf="@id/activity4"
+                android:layout_marginTop="10dp"
+                style="@style/activity_box_style">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/vidImage5"
+                    android:src="@drawable/walking"
+                    app:layout_constraintTop_toTopOf="parent"
+                    style="@style/activity_image_style" />
+
+                <ImageView
+                    android:id="@+id/playButton5"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/play_button"
+                    app:layout_constraintTop_toTopOf="@id/vidImage5"
+                    app:layout_constraintBottom_toBottomOf="@id/vidImage5"
+                    app:layout_constraintStart_toStartOf="@id/vidImage5"
+                    app:layout_constraintEnd_toEndOf="@id/vidImage5"/>
+
+                <TextView
+                    android:id="@+id/activityTitle5"
+                    android:text="Walking"
+                    app:layout_constraintTop_toBottomOf="@id/vidImage5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/activity_title_style" />
+
+                <TextView
+                    android:text="Walking keeps your heart healthy, strengthens your legs, and helps burn calories. It also reduces stress and improves overall mood."
+                    app:layout_constraintTop_toBottomOf="@id/activityTitle5"
+                    style="@style/activity_desc_style" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            activity 6-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/activity6"
+                app:layout_constraintTop_toBottomOf="@id/activity5"
+                android:layout_marginTop="10dp"
+                style="@style/activity_box_style">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/vidImage6"
+                    android:src="@drawable/pushup"
+                    app:layout_constraintTop_toTopOf="parent"
+                    style="@style/activity_image_style" />
+
+                <ImageView
+                    android:id="@+id/playButton6"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/play_button"
+                    app:layout_constraintTop_toTopOf="@id/vidImage6"
+                    app:layout_constraintBottom_toBottomOf="@id/vidImage6"
+                    app:layout_constraintStart_toStartOf="@id/vidImage6"
+                    app:layout_constraintEnd_toEndOf="@id/vidImage6"/>
+
+                <TextView
+                    android:id="@+id/activityTitle6"
+                    android:text="Push up"
+                    app:layout_constraintTop_toBottomOf="@id/vidImage6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/activity_title_style" />
+
+                <TextView
+                    android:text="Push-ups build upper body strength, especially in the chest, shoulders, and arms. They also improve core stability and overall endurance."
+                    app:layout_constraintTop_toBottomOf="@id/activityTitle6"
+                    style="@style/activity_desc_style" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            activity 7-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/activity7"
+                app:layout_constraintTop_toBottomOf="@id/activity6"
+                android:layout_marginTop="10dp"
+                style="@style/activity_box_style">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/vidImage7"
+                    android:src="@drawable/planking"
+                    app:layout_constraintTop_toTopOf="parent"
+                    style="@style/activity_image_style" />
+
+                <ImageView
+                    android:id="@+id/playButton7"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/play_button"
+                    app:layout_constraintTop_toTopOf="@id/vidImage7"
+                    app:layout_constraintBottom_toBottomOf="@id/vidImage7"
+                    app:layout_constraintStart_toStartOf="@id/vidImage7"
+                    app:layout_constraintEnd_toEndOf="@id/vidImage7"/>
+
+                <TextView
+                    android:id="@+id/activityTitle7"
+                    android:text="Planking"
+                    app:layout_constraintTop_toBottomOf="@id/vidImage7"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/activity_title_style" />
+
+                <TextView
+                    android:text="Planking strengthens your core, improves posture, and enhances overall stability. It also helps build endurance and reduces back pain."
+                    app:layout_constraintTop_toBottomOf="@id/activityTitle7"
+                    style="@style/activity_desc_style" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            activity 8-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/activity8"
+                app:layout_constraintTop_toBottomOf="@id/activity7"
+                android:layout_marginTop="10dp"
+                style="@style/activity_box_style">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/vidImage8"
+                    android:src="@drawable/crunch"
+                    app:layout_constraintTop_toTopOf="parent"
+                    style="@style/activity_image_style" />
+
+                <ImageView
+                    android:id="@+id/playButton8"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/play_button"
+                    app:layout_constraintTop_toTopOf="@id/vidImage8"
+                    app:layout_constraintBottom_toBottomOf="@id/vidImage8"
+                    app:layout_constraintStart_toStartOf="@id/vidImage8"
+                    app:layout_constraintEnd_toEndOf="@id/vidImage8"/>
+
+                <TextView
+                    android:id="@+id/activityTitle8"
+                    android:text="Bicycle crunches"
+                    app:layout_constraintTop_toBottomOf="@id/vidImage8"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/activity_title_style" />
+
+                <TextView
+                    android:text="Bicycle crunches strengthen your core, tone your abs, and improve balance. They also help burn calories and enhance coordination."
+                    app:layout_constraintTop_toBottomOf="@id/activityTitle8"
+                    style="@style/activity_desc_style" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            acitivyt 9-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/activity9"
+                app:layout_constraintTop_toBottomOf="@id/activity8"
+                android:layout_marginTop="10dp"
+                style="@style/activity_box_style">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/vidImage9"
+                    android:src="@drawable/high_knee"
+                    app:layout_constraintTop_toTopOf="parent"
+                    style="@style/activity_image_style" />
+
+                <ImageView
+                    android:id="@+id/playButton9"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/play_button"
+                    app:layout_constraintTop_toTopOf="@id/vidImage9"
+                    app:layout_constraintBottom_toBottomOf="@id/vidImage9"
+                    app:layout_constraintStart_toStartOf="@id/vidImage9"
+                    app:layout_constraintEnd_toEndOf="@id/vidImage9"/>
+
+                <TextView
+                    android:id="@+id/activityTitle9"
+                    android:text="High knees"
+                    app:layout_constraintTop_toBottomOf="@id/vidImage9"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/activity_title_style" />
+
+                <TextView
+                    android:text="High knees improve cardiovascular endurance, strengthen leg muscles, and burn calories. They also enhance coordination and boost overall agility."
+                    app:layout_constraintTop_toBottomOf="@id/activityTitle9"
+                    style="@style/activity_desc_style" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            activity 10-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/activity10"
+                app:layout_constraintTop_toBottomOf="@id/activity9"
+                android:layout_marginTop="10dp"
+                style="@style/activity_box_style">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/vidImage10"
+                    android:src="@drawable/wall_sit"
+                    app:layout_constraintTop_toTopOf="parent"
+                    style="@style/activity_image_style" />
+
+                <ImageView
+                    android:id="@+id/playButton10"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/play_button"
+                    app:layout_constraintTop_toTopOf="@id/vidImage10"
+                    app:layout_constraintBottom_toBottomOf="@id/vidImage10"
+                    app:layout_constraintStart_toStartOf="@id/vidImage10"
+                    app:layout_constraintEnd_toEndOf="@id/vidImage10"/>
+
+                <TextView
+                    android:id="@+id/activityTitle10"
+                    android:text="Wall sits"
+                    app:layout_constraintTop_toBottomOf="@id/vidImage10"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/activity_title_style" />
+
+                <TextView
+                    android:text="Wall sits strengthen your legs, improve endurance, and enhance lower body stability. They also help build core strength and improve posture."
+                    app:layout_constraintTop_toBottomOf="@id/activityTitle10"
+                    style="@style/activity_desc_style" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            activity 11-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/activity11"
+                app:layout_constraintTop_toBottomOf="@id/activity10"
+                android:layout_marginTop="10dp"
+                style="@style/activity_box_style">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/vidImage11"
+                    android:src="@drawable/chair_dip"
+                    app:layout_constraintTop_toTopOf="parent"
+                    style="@style/activity_image_style" />
+
+                <ImageView
+                    android:id="@+id/playButton11"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/play_button"
+                    app:layout_constraintTop_toTopOf="@id/vidImage11"
+                    app:layout_constraintBottom_toBottomOf="@id/vidImage11"
+                    app:layout_constraintStart_toStartOf="@id/vidImage11"
+                    app:layout_constraintEnd_toEndOf="@id/vidImage11"/>
+
+                <TextView
+                    android:id="@+id/activityTitle11"
+                    android:text="Chair dips"
+                    app:layout_constraintTop_toBottomOf="@id/vidImage11"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/activity_title_style" />
+
+                <TextView
+                    android:text="Chair dips strengthen your arms, shoulders, and chest while improving upper body endurance. They also help build triceps and improve flexibility in the arms."
+                    app:layout_constraintTop_toBottomOf="@id/activityTitle11"
+                    style="@style/activity_desc_style" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
