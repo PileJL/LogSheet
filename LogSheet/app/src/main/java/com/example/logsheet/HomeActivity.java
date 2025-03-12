@@ -85,8 +85,16 @@ public class HomeActivity extends AppCompatActivity {
 
         // triviaCloseButton onClick
         binding.triviaCloseButton.setOnClickListener(v -> binding.triviaOverlay.setVisibility(View.GONE));
+
+        //activity onclicks
+        binding.activity1.setOnClickListener(v -> activityOnClick());
+        binding.activity2.setOnClickListener(v -> activityOnClick());
+        binding.activity3.setOnClickListener(v -> activityOnClick());
     }
 
+    private void activityOnClick() {
+        Utility.navigateToActivity(this, new Intent(this, VideoActivity.class));
+    }
 
 
     private void filterActivities(String query, ArrayList<ConstraintLayout> activityContainers, ArrayList<TextView> activityTitles) {

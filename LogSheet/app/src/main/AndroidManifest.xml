@@ -13,6 +13,9 @@
         android:theme="@style/Theme.LogSheet"
         tools:targetApi="31">
         <activity
+            android:name=".VideoActivity"
+            android:exported="false" />
+        <activity
             android:name=".Notification.NotifPage"
             android:exported="true" />
         <activity
