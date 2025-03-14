@@ -77,9 +77,11 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {}
         });
-
+        // Get all unique dates
+        LogDBHelper dbHelper = new LogDBHelper(this);
+        ArrayList<HashMap<String, String>> uniqueDates = dbHelper.getUniqueDates(Utility.getUserId(getApplicationContext()));
         // display notif popup
-        if (!LoginActivity.popupsDone) {
+        if (!LoginActivity.popupsDone && !uniqueDates.isEmpty()) {
             displayNotifPopup();
             LoginActivity.popupsDone = true;
         }
