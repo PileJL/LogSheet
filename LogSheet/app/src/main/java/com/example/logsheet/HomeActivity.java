@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.logsheet.Logs.LogsPage;
+import com.example.logsheet.Models.User;
 import com.example.logsheet.Utilities.Utility;
 import com.example.logsheet.databinding.ActivityHomeBinding;
 
@@ -26,7 +28,7 @@ public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding binding;
     ArrayList<ConstraintLayout> activityContainers;
     ArrayList<TextView> activityTitles;
-
+    User loggedInUser = LoginActivity.loggedInUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,10 +88,32 @@ public class HomeActivity extends AppCompatActivity {
         // triviaCloseButton onClick
         binding.triviaCloseButton.setOnClickListener(v -> binding.triviaOverlay.setVisibility(View.GONE));
 
-        //activity onclicks
+        // set logOut button onClick
+        binding.logout.setOnClickListener(v -> logOut());
+
+        //activity onClicks
         binding.activity1.setOnClickListener(v -> activityOnClick());
         binding.activity2.setOnClickListener(v -> activityOnClick());
         binding.activity3.setOnClickListener(v -> activityOnClick());
+        binding.activity4.setOnClickListener(v -> activityOnClick());
+        binding.activity5.setOnClickListener(v -> activityOnClick());
+        binding.activity6.setOnClickListener(v -> activityOnClick());
+        binding.activity7.setOnClickListener(v -> activityOnClick());
+        binding.activity8.setOnClickListener(v -> activityOnClick());
+        binding.activity9.setOnClickListener(v -> activityOnClick());
+        binding.activity10.setOnClickListener(v -> activityOnClick());
+        binding.activity11.setOnClickListener(v -> activityOnClick());
+
+        // set username
+        binding.pageHeader.setText("Hello, "+ loggedInUser.getUsername());
+
+
+    }
+
+    private void logOut() {
+        Utility.logOutUser(getApplicationContext()); // change data in shared preferences
+        Utility.navigateToActivity(this, new Intent(this, LoginActivity.class));
+        finish();
     }
 
     private void activityOnClick() {

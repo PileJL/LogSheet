@@ -3,6 +3,7 @@ package com.example.logsheet.Logs;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -52,6 +53,16 @@ public class LogsAdapter extends RecyclerView.Adapter<LogsViewHolder> {
 
         // set onclick of item
         holder.itemContainer.setOnClickListener(v -> listener.onItemClicked(items.get(position)));
+
+        // set editButton onClick
+        holder.deleteButton.setOnClickListener(v -> listener.onDeleteClicked(items.get(position), context));
+
+    }
+
+    public void removeItem(int position) {
+        items.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, items.size()); // Update other items' positions
     }
 
     @Override

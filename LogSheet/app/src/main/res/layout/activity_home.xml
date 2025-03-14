@@ -216,14 +216,15 @@
                     android:layout_height="25dp"
                     android:src="@drawable/home_icon"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:tint="@color/yellow" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Home"
                     android:textSize="15sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/main_yellow"
                     android:fontFamily="@font/inter_bold"
                     android:layout_marginStart="10dp"
                     app:layout_constraintStart_toEndOf="@id/homeIcon"

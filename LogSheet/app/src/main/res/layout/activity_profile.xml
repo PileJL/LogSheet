@@ -101,7 +101,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/username"
             android:inputType="textPersonName"
-            android:maxLength="30"
+            android:maxLength="15"
             android:text="User Name"
             app:layout_constraintTop_toBottomOf="@id/line"
             android:paddingStart="80dp"

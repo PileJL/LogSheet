@@ -64,7 +64,7 @@
                 android:paddingHorizontal="10dp"
                 android:textColor="@color/white"
                 android:background="@drawable/auth_field"
-                android:maxLength="30"/>
+                android:maxLength="15"/>
 
         </com.google.android.material.textfield.TextInputLayout>
         <!--        password-->

@@ -1,9 +1,12 @@
 package com.example.logsheet.Logs;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -25,18 +28,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.logsheet.AssessmentPage;
 import com.example.logsheet.DayLogs.DayLogsPage;
 import com.example.logsheet.HomeActivity;
+import com.example.logsheet.LoginActivity;
 import com.example.logsheet.ProfileActivity;
 import com.example.logsheet.R;
+import com.example.logsheet.Utilities.LogDBHelper;
 import com.example.logsheet.Utilities.Utility;
 import com.example.logsheet.WeekLogs;
 import com.example.logsheet.databinding.ActivityLogsPageBinding;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class LogsPage extends AppCompatActivity implements LogsSelectListener{
 
     ActivityLogsPageBinding binding;
+    public static String feeling, activityDesc, intensity;
+    public static int hourDuration, minuteDuration;
+    int userId;
+    LogDBHelper dbHelper;
+    List<LogsItem> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +69,9 @@ public class LogsPage extends AppCompatActivity implements LogsSelectListener{
         };
         // Add the callback to the OnBackPressedDispatcher
         getOnBackPressedDispatcher().addCallback(this, callback);
+        // initializations
+        userId = Utility.getUserId(getApplicationContext());
+        dbHelper = new LogDBHelper(this);
 
         // sideNavOverlay onclick
         binding.sideNavOverlay.setOnClickListener(v -> binding.sideNavOverlay.setVisibility(View.GONE));
@@ -83,7 +97,7 @@ public class LogsPage extends AppCompatActivity implements LogsSelectListener{
         });
 
         // emoticonNextButton onclick
-        binding.formButton.setOnClickListener(v -> formButonOnClick());
+        binding.formButton.setOnClickListener(v -> formButtonOnClick());
 
         setUpSpinner();
 
@@ -99,28 +113,49 @@ public class LogsPage extends AppCompatActivity implements LogsSelectListener{
         // addLog backButton onclick
         binding.addLogBackButton.setOnClickListener(v -> displayAddLogPage1());
 
-        List<LogsItem> items = new ArrayList<LogsItem>();
-        items.add(new LogsItem("February 2021 - Week 1", "Highly Active"));
-        items.add(new LogsItem("February 2021 - Week 2", "Inactive"));
-        items.add(new LogsItem("February 2021 - Week 1", "Low Activity"));
-        items.add(new LogsItem("February 2021 - Week 2", "Moderate Activity"));
-        items.add(new LogsItem("February 2021 - Week 1", "Highly Active"));
-        items.add(new LogsItem("February 2021 - Week 2", "Inactive"));
-        items.add(new LogsItem("February 2021 - Week 1", "Low Activity"));
-        items.add(new LogsItem("February 2021 - Week 2", "Moderate Activity"));
-        items.add(new LogsItem("February 2021 - Week 1", "Highly Active"));
-        items.add(new LogsItem("February 2021 - Week 2", "Inactive"));
-        items.add(new LogsItem("February 2021 - Week 1", "Low Activity"));
-        items.add(new LogsItem("February 2021 - Week 2", "Moderate Activity"));
-        items.add(new LogsItem("February 2021 - Week 1", "Highly Active"));
-        items.add(new LogsItem("February 2021 - Week 2", "Inactive"));
-        items.add(new LogsItem("February 2021 - Week 1", "Low Activity"));
-        items.add(new LogsItem("February 2021 - Week 2", "Moderate Activity"));
-        items.add(new LogsItem("February 2021 - Week 22", "Active"));
+        // logOut button onclick
+        binding.logout.setOnClickListener(v -> logOut());
+
+        // emoticons onClick
+        binding.sad.setOnClickListener(this::emoticonsOnClick);
+        binding.happy.setOnClickListener(this::emoticonsOnClick);
+        binding.tired.setOnClickListener(this::emoticonsOnClick);
+        binding.loved.setOnClickListener(this::emoticonsOnClick);
+        binding.sleepy.setOnClickListener(this::emoticonsOnClick);
+        binding.awkward.setOnClickListener(this::emoticonsOnClick);
+        binding.strong.setOnClickListener(this::emoticonsOnClick);
+        binding.angry.setOnClickListener(this::emoticonsOnClick);
+
+
+        // Get all unique dates
+        ArrayList<HashMap<String, String>> uniqueDates = dbHelper.getUniqueDates(Utility.getUserId(getApplicationContext()));
+
+        // add all unique dates to recyclerview items
+        items = new ArrayList<>();
+        // Loop through each HashMap in the ArrayList
+        if (!uniqueDates.isEmpty()) {
+            binding.noLogsText.setVisibility(View.GONE);
+            for (HashMap<String, String> date : uniqueDates) {
+                int year = Integer.parseInt(date.get("year"));
+                int month = Integer.parseInt(date.get("month"));
+                int week = Integer.parseInt(date.get("week"));
+                items.add(new LogsItem(dbHelper.getActivityLevel(userId, year, month, week),
+                        year, month, week));
+            }
+        }
+        else {
+            binding.noLogsText.setVisibility(View.VISIBLE);
+        }
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(new LogsAdapter(this, items, this));
 
+    }
+
+    private void logOut() {
+        Utility.logOutUser(getApplicationContext()); // change data in shared preferences
+        Utility.navigateToActivity(this, new Intent(this, LoginActivity.class));
+        finish();
     }
 
     private void addLog() {
@@ -171,7 +206,27 @@ public class LogsPage extends AppCompatActivity implements LogsSelectListener{
         Utility.navigateToActivity(this, new Intent(this, WeekLogs.class));
     }
 
+    @Override
+    public void onDeleteClicked(LogsItem item, Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle("Confirm Deletion")
+                .setMessage("Are you sure you want to delete these logs? This action cannot be undone.")
+                .setPositiveButton("Delete", (dialog, which) -> {
+                    // Delete the logs from the database
+                    boolean isDeleted = dbHelper.deleteLogs(userId, item.getYear(), item.getMonth(), item.getWeek());
+                    if (isDeleted) {
+                        Toast.makeText(context, "Logs deleted successfully!", Toast.LENGTH_SHORT).show();
+                        recreate();
+                    } else {
+                        Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
     private void displayAddLogPage1() {
+        binding.formButton.setVisibility(View.GONE);
         binding.addLogBackButton.setVisibility(View.GONE); // hide backButton
         binding.formTitle.setText("How are you feeling\ntoday?"); // change form title
         binding.emotionContainer.setVisibility(View.VISIBLE); // display emoticons
@@ -180,13 +235,11 @@ public class LogsPage extends AppCompatActivity implements LogsSelectListener{
         binding.line2.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
         // hide physical activity form
         binding.activityFormContainer.setVisibility(View.GONE);
-        // set button text
-        binding.formButton.setText("Next");
     }
 
-    private void formButonOnClick() {
-        if (binding.formButton.getText().toString().equalsIgnoreCase("Next")) {
+    private void emoticonsOnClick(View v) {
             binding.addLogBackButton.setVisibility(View.VISIBLE); // display backButton
+            binding.formButton.setVisibility(View.VISIBLE); // display formButton
             binding.formTitle.setText("Add Log"); // change form title
             binding.emotionContainer.setVisibility(View.GONE); // hide emoticons
             // change navigation lines colors
@@ -194,11 +247,21 @@ public class LogsPage extends AppCompatActivity implements LogsSelectListener{
             binding.line2.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.yellow));
             // hide physical activity form
             binding.activityFormContainer.setVisibility(View.VISIBLE);
-            // set button text
-            binding.formButton.setText("Submit");
+            // set feeling
+            feeling = getResources().getResourceEntryName(v.getId());;
+    }
+    private void formButtonOnClick() {
+        activityDesc = binding.actDesc.getText().toString();
+        hourDuration = Integer.parseInt(binding.hour.getText().toString());
+        minuteDuration = Integer.parseInt(binding.minute.getText().toString());
+        intensity = binding.spinner.getSelectedItem().toString();
+        // check if all fields are field
+        if (activityDesc.isEmpty() || hourDuration < 0 || minuteDuration < 0 || minuteDuration > 59) {
+            Toast.makeText(this, "Please enter a valid information.", Toast.LENGTH_SHORT).show();
+            return;
         }
-        else {
-            Utility.navigateToActivity(this, new Intent(this, AssessmentPage.class));
-        }
+
+        Utility.navigateToActivity(this, new Intent(this, AssessmentPage.class));
+        finish();
     }
 }
