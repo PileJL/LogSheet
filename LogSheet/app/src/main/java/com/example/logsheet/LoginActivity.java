@@ -48,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
 
-
         // signup text onclick
         binding.signupText.setOnClickListener(v -> {
             Utility.navigateToActivity(this, new Intent(this, SignupActivity.class));

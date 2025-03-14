@@ -144,7 +144,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 <!--    side nav-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/overlay"
