@@ -135,6 +135,6 @@ public class DayLogsItem {
     }
 
     public String getDuration() {
-        return hourDuration + "h " + minuteDuration + " mins";
+        return hourDuration + "hr " + minuteDuration + "mins";
     }
 }

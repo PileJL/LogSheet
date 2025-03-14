@@ -19,6 +19,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.logsheet.Utilities.Utility;
 import com.example.logsheet.databinding.ActivityVideoBinding;
 
+import java.util.HashMap;
+
 public class VideoActivity extends AppCompatActivity {
 
     ActivityVideoBinding binding;
@@ -51,9 +53,26 @@ public class VideoActivity extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        // get intent
+        Intent intent = getIntent();
+        String activity = intent.getStringExtra("activity");
+
+        // setup videos
+        HashMap<String, Integer> vidoes = new HashMap<>();
+        vidoes.put("cycling", R.raw.cycling);
+        vidoes.put("dancing", R.raw.dancing);
+        vidoes.put("jogging", R.raw.jogging);
+        vidoes.put("jumping jacks", R.raw.jumping_jacks);
+        vidoes.put("walking", R.raw.walking);
+        vidoes.put("push up", R.raw.push_up);
+        vidoes.put("planking", R.raw.plank);
+        vidoes.put("bicycle crunches", R.raw.bicycle_crunch);
+        vidoes.put("high knees", R.raw.high_knees);
+        vidoes.put("wall sits", R.raw.wall_sit);
+        vidoes.put("chair dips", R.raw.chair_dips);
 
         VideoView videoView = findViewById(R.id.video_view);
-        String video_path = "android.resource://" + getPackageName() + "/" + R.raw.bicycle_crunch;
+        String video_path = "android.resource://" + getPackageName() + "/" + vidoes.get(activity);
         Uri uri = Uri.parse(video_path);
         videoView.setVideoURI(uri);
 

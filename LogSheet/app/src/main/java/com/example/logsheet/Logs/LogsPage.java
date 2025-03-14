@@ -254,13 +254,19 @@ public class LogsPage extends AppCompatActivity implements LogsSelectListener{
             feeling = getResources().getResourceEntryName(v.getId());;
     }
     private void formButtonOnClick() {
-        activityDesc = binding.actDesc.getText().toString();
-        hourDuration = Integer.parseInt(binding.hour.getText().toString());
-        minuteDuration = Integer.parseInt(binding.minute.getText().toString());
-        intensity = binding.spinner.getSelectedItem().toString();
+        try {
+            activityDesc = binding.actDesc.getText().toString();
+            hourDuration = Integer.parseInt(binding.hour.getText().toString());
+            minuteDuration = Integer.parseInt(binding.minute.getText().toString());
+            intensity = binding.spinner.getSelectedItem().toString();
+        }
+        catch (Exception e) {
+            Toast.makeText(this, "Please enter valid information.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         // check if all fields are field
-        if (activityDesc.isEmpty() || hourDuration < 0 || minuteDuration < 0 || minuteDuration > 59) {
-            Toast.makeText(this, "Please enter a valid information.", Toast.LENGTH_SHORT).show();
+        if (activityDesc.isEmpty() || (hourDuration == 0 && minuteDuration == 0) || hourDuration < 0 || minuteDuration < 0 || minuteDuration > 59) {
+            Toast.makeText(this, "Please enter valid information.", Toast.LENGTH_SHORT).show();
             return;
         }
 

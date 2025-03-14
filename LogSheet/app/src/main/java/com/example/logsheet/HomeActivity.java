@@ -36,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     LogDBHelper logDBHelper;
     String activeness;
     int month, year, monthWeek;
+    public static boolean popupsDone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +79,15 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         // display notif popup
-        displayNotifPopup();
+        if (!LoginActivity.popupsDone) {
+            displayNotifPopup();
+            LoginActivity.popupsDone = true;
+        }
+        else {
+            binding.notifOverlay.setVisibility(View.GONE);
+            binding.triviaOverlay.setVisibility(View.GONE);
+        }
+
         // overlay onclick
         binding.overlay.setOnClickListener(v -> binding.overlay.setVisibility(View.GONE));
 
@@ -120,17 +129,17 @@ public class HomeActivity extends AppCompatActivity {
         binding.logout.setOnClickListener(v -> logOut());
 
         //activity onClicks
-        binding.activity1.setOnClickListener(v -> activityOnClick());
-        binding.activity2.setOnClickListener(v -> activityOnClick());
-        binding.activity3.setOnClickListener(v -> activityOnClick());
-        binding.activity4.setOnClickListener(v -> activityOnClick());
-        binding.activity5.setOnClickListener(v -> activityOnClick());
-        binding.activity6.setOnClickListener(v -> activityOnClick());
-        binding.activity7.setOnClickListener(v -> activityOnClick());
-        binding.activity8.setOnClickListener(v -> activityOnClick());
-        binding.activity9.setOnClickListener(v -> activityOnClick());
-        binding.activity10.setOnClickListener(v -> activityOnClick());
-        binding.activity11.setOnClickListener(v -> activityOnClick());
+        binding.activity1.setOnClickListener(v -> activityOnClick("cycling"));
+        binding.activity2.setOnClickListener(v -> activityOnClick("dancing"));
+        binding.activity3.setOnClickListener(v -> activityOnClick("jogging"));
+        binding.activity4.setOnClickListener(v -> activityOnClick("jumping jacks"));
+        binding.activity5.setOnClickListener(v -> activityOnClick("walking"));
+        binding.activity6.setOnClickListener(v -> activityOnClick("push up"));
+        binding.activity7.setOnClickListener(v -> activityOnClick("planking"));
+        binding.activity8.setOnClickListener(v -> activityOnClick("bicycle crunches"));
+        binding.activity9.setOnClickListener(v -> activityOnClick("high knees"));
+        binding.activity10.setOnClickListener(v -> activityOnClick("wall sits"));
+        binding.activity11.setOnClickListener(v -> activityOnClick("chair dips"));
 
         // set username
         binding.pageHeader.setText("Hello, "+ loggedInUser.getUsername());
@@ -164,8 +173,10 @@ public class HomeActivity extends AppCompatActivity {
         finish();
     }
 
-    private void activityOnClick() {
-        Utility.navigateToActivity(this, new Intent(this, VideoActivity.class));
+    private void activityOnClick(String activity) {
+        Intent intent = new Intent(this, VideoActivity.class);
+        intent.putExtra("activity", activity);
+        Utility.navigateToActivity(this, intent);
     }
 
 

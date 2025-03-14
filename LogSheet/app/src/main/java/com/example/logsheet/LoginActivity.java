@@ -22,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     public static User loggedInUser;
     private UserDBHelper userDbHelper;
     SharedPreferences sharedPreferences;
+    public static boolean popupsDone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         // initializations
         userDbHelper = new UserDBHelper(this);
         sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        popupsDone = false;
 
         // check if user if logged
         if (Utility.isUserLoggedIn(this)) {

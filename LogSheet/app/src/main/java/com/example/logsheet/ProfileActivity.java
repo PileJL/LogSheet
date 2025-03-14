@@ -101,7 +101,8 @@ public class ProfileActivity extends AppCompatActivity {
         
         if (isUpdated) {
             Toast.makeText(this, "User updated successfully.", Toast.LENGTH_SHORT).show();
-            binding.headerUsername.setText(binding.username.getText().toString());
+            LoginActivity.loggedInUser = dbHelper.getUserById(loggedInUser.getId());
+            recreate();
         } else {
             Toast.makeText(this, "User update failed.", Toast.LENGTH_SHORT).show();
         }
