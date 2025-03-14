@@ -16,13 +16,11 @@
             android:name=".VideoActivity"
             android:exported="false" />
         <activity
-            android:name=".Notification.NotifPage"
-            android:exported="true" />
-        <activity
             android:name=".LogDetailsPage"
             android:exported="true" />
         <activity
             android:name=".AssessmentPage"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true" />
         <activity
             android:name=".DayLogs.DayLogsPage"

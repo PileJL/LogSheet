@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.logsheet.R;
+import com.example.logsheet.Utilities.Utility;
 
 import java.util.List;
 
@@ -38,18 +39,7 @@ public class LogsAdapter extends RecyclerView.Adapter<LogsViewHolder> {
         holder.activeness.setText(items.get(position).getActiveness());
 
         // change color of activeness based on passed value
-        if (items.get(position).getActiveness().equalsIgnoreCase("Highly Active")) {
-            holder.activeness.setTextColor(ContextCompat.getColor(context, R.color.green));
-        }
-        else if (items.get(position).getActiveness().equalsIgnoreCase("Inactive")) {
-            holder.activeness.setTextColor(ContextCompat.getColor(context, R.color.red));
-        }
-        else if (items.get(position).getActiveness().equalsIgnoreCase("Low Activity")) {
-            holder.activeness.setTextColor(ContextCompat.getColor(context, R.color.orange));
-        }
-        else if (items.get(position).getActiveness().equalsIgnoreCase("Moderate Activity")) {
-            holder.activeness.setTextColor(ContextCompat.getColor(context, R.color.yellow));
-        }
+        Utility.setActivenessColor(context, holder.activeness, items.get(position).getActiveness());
 
         // set onclick of item
         holder.itemContainer.setOnClickListener(v -> listener.onItemClicked(items.get(position)));

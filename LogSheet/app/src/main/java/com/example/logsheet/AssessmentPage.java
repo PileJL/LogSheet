@@ -88,7 +88,7 @@ public class AssessmentPage extends AppCompatActivity {
         }
 
         // Get the current date in "yyyy-MM-dd" format
-        String dateAdded = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime());
+        String dateTimeAdded = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(calendar.getTime());
 
         // Insert log into database
         long result = logDBHelper.insertLog( Utility.getUserId(getApplicationContext()),
@@ -96,7 +96,7 @@ public class AssessmentPage extends AppCompatActivity {
                 binding.field1.getText().toString(), binding.field2.getText().toString(), binding.field3.getText().toString(),
                 binding.field4.getText().toString(), binding.field5.getText().toString(), binding.field6.getText().toString(),
                 binding.field7.getText().toString(),
-                month, year, monthWeek, dayOfWeek, dateAdded
+                month, year, monthWeek, dayOfWeek, dateTimeAdded
         );
 //        long result = logDBHelper.insertLog( "feeling", "activityDesc", 1, 30, "intensity",
 //                "yes", "no", "yes", "no", "yes", "no" ,"yes",

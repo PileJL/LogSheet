@@ -8,6 +8,307 @@
     tools:context=".DayLogs.DayLogsPage"
     android:background="@drawable/sub_bg">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/logViewOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/overlay_color"
+        android:visibility="gone"
+        android:elevation="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/gradient_blue_no_shadow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="30dp">
+
+            <ImageView
+                android:id="@+id/closeActivityViewIcon"
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/white_close_button"
+                android:layout_margin="15dp"/>
+            <!--        aciticity title-->
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Activity Desc..."
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/white"
+                android:fontFamily="@font/inter_bold"
+                android:textSize="18sp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="18dp"/>
+            <!--intensity-->
+            <TextView
+                android:id="@+id/intensityLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Intensity:"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintStart_toStartOf="@id/title"
+                android:textColor="@color/white"
+                android:fontFamily="@font/inter_regular"
+                android:textSize="12sp"
+                android:layout_marginTop="-2dp"/>
+
+            <TextView
+                android:id="@+id/intensity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Light...."
+                app:layout_constraintStart_toEndOf="@id/intensityLabel"
+                app:layout_constraintTop_toTopOf="@id/intensityLabel"
+                app:layout_constraintBottom_toBottomOf="@id/intensityLabel"
+                android:textColor="@color/orange"
+                android:fontFamily="@font/inter_regular"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"/>
+            <!--        duration-->
+            <TextView
+                android:id="@+id/durationLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Duration:"
+                app:layout_constraintTop_toTopOf="@id/intensityLabel"
+                app:layout_constraintBottom_toBottomOf="@id/intensityLabel"
+                app:layout_constraintEnd_toStartOf="@id/duration"
+                android:textColor="@color/white"
+                android:fontFamily="@font/inter_regular"
+                android:textSize="12sp"
+                android:layout_marginEnd="5dp"/>
+
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 hr 30 mins"
+                app:layout_constraintTop_toTopOf="@id/intensityLabel"
+                app:layout_constraintBottom_toBottomOf="@id/intensityLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="25dp"
+                android:textColor="#aeb1b6"
+                android:fontFamily="@font/inter_regular"
+                android:textSize="11sp"/>
+
+            <RelativeLayout
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/intensity"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"/>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/line"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="20dp">
+
+                    <!--        feelings-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/feelingContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:background="@drawable/profile_fields_shape"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginHorizontal="20dp"
+                        android:paddingHorizontal="10dp"
+                        android:layout_marginTop="15dp">
+
+                        <TextView
+                            android:id="@+id/feelingLabel"
+                            android:text="How are you feeling today?"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            style="@style/log_details_question_style" />
+
+                        <TextView
+                            android:id="@+id/feeling"
+                            android:text="Strong"
+                            app:layout_constraintTop_toTopOf="@id/feelingLabel"
+                            app:layout_constraintBottom_toBottomOf="@id/feelingLabel"
+                            app:layout_constraintStart_toEndOf="@id/feelingLabel"
+                            android:layout_marginStart="5dp"
+                            style="@style/log_details_answer_style" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <!--        question 1-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/questionContainer1"
+                        app:layout_constraintTop_toBottomOf="@id/feelingContainer"
+                        style="@style/log_details_question_container_style">
+
+                        <TextView
+                            android:id="@+id/questionLabel1"
+                            android:text="1. How did I feel both before and after the physical activities in terms of energy levels and mood?"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            style="@style/log_details_question_style" />
+
+                        <TextView
+                            android:id="@+id/question1"
+                            android:text="Generate Lorem Ipsum placeholder text for use in your graphic, print and web layouts, and discover plugins for your favorite writing, design and blogging tools."
+                            app:layout_constraintTop_toBottomOf="@id/questionLabel1"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            style="@style/log_details_answer_style" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <!--        question 2-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/questionContainer2"
+                        app:layout_constraintTop_toBottomOf="@id/questionContainer1"
+                        style="@style/log_details_question_container_style">
+
+                        <TextView
+                            android:id="@+id/questionLabel2"
+                            android:text="2. What were the strongest moments of my performance during the activity?"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            style="@style/log_details_question_style" />
+
+                        <TextView
+                            android:id="@+id/question2"
+                            android:text="Generate Lorem Ipsum placeholder text for use in your graphic, print and web layouts, and discover plugins for your favorite writing, design and blogging tools."
+                            app:layout_constraintTop_toBottomOf="@id/questionLabel2"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            style="@style/log_details_answer_style" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <!--        question 3-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/questionContainer3"
+                        app:layout_constraintTop_toBottomOf="@id/questionContainer2"
+                        style="@style/log_details_question_container_style">
+
+                        <TextView
+                            android:id="@+id/questionLabel3"
+                            android:text="3. Were there any specific challenges or obstacles I faced during the activity, and how did I overcome them?"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            style="@style/log_details_question_style" />
+
+                        <TextView
+                            android:id="@+id/question3"
+                            android:text="Generate Lorem Ipsum placeholder text for use in your graphic, print and web layouts, and discover plugins for your favorite writing, "
+                            app:layout_constraintTop_toBottomOf="@id/questionLabel3"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            style="@style/log_details_answer_style" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <!--        question 4-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/questionContainer4"
+                        app:layout_constraintTop_toBottomOf="@id/questionContainer3"
+                        style="@style/log_details_question_container_style">
+
+                        <TextView
+                            android:id="@+id/questionLabel4"
+                            android:text="4. How well did I stay within my perceived limits and avoid overexertion?"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            style="@style/log_details_question_style" />
+
+                        <TextView
+                            android:id="@+id/question4"
+                            android:text="Generate Lorem Ipsum placeholder text for use in your graphic, print and web layouts, and discover plugins for your favorite writing, "
+                            app:layout_constraintTop_toBottomOf="@id/questionLabel4"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            style="@style/log_details_answer_style" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <!--                question 5-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/questionContainer5"
+                        app:layout_constraintTop_toBottomOf="@id/questionContainer4"
+                        style="@style/log_details_question_container_style">
+
+                        <TextView
+                            android:id="@+id/questionLabel5"
+                            android:text="5. How does this session compare my previous ones in terms or progress and improvement?"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            style="@style/log_details_question_style" />
+
+                        <TextView
+                            android:id="@+id/question5"
+                            android:text="Generate Lorem Ipsum placeholder text for use in your graphic, print and web layouts, and discover plugins for your favorite writing, "
+                            app:layout_constraintTop_toBottomOf="@id/questionLabel5"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            style="@style/log_details_answer_style" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <!--                question 6-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/questionContainer6"
+                        app:layout_constraintTop_toBottomOf="@id/questionContainer5"
+                        style="@style/log_details_question_container_style">
+
+                        <TextView
+                            android:id="@+id/questionLabel6"
+                            android:text="6. What can I do differently in my next session to enhance my overall performance and experience?"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            style="@style/log_details_question_style" />
+
+                        <TextView
+                            android:id="@+id/question6"
+                            android:text="Generate Lorem Ipsum placeholder text for use in your graphic, print and web layouts, and discover plugins for your favorite writing, "
+                            app:layout_constraintTop_toBottomOf="@id/questionLabel6"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            style="@style/log_details_answer_style" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <!--                question 7-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/questionContainer7"
+                        app:layout_constraintTop_toBottomOf="@id/questionContainer6"
+                        style="@style/log_details_question_container_style">
+
+                        <TextView
+                            android:id="@+id/questionLabel7"
+                            android:text="7. How did this activity contribute to my overall fitness and well-being goals?"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            style="@style/log_details_question_style" />
+
+                        <TextView
+                            android:id="@+id/question7"
+                            android:text="Generate Lorem Ipsum placeholder text for use in your graphic, print and web layouts, and discover plugins for your favorite writing, "
+                            app:layout_constraintTop_toBottomOf="@id/questionLabel7"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            style="@style/log_details_answer_style" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ImageView
         android:id="@+id/backButton"
         android:layout_width="40dp"
@@ -48,6 +349,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/noLogsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/day"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="No Logs for this day."
+        android:textSize="13sp"
+        android:textColor="@color/text_color"
+        android:fontFamily="@font/inter_regular"
+        android:visibility="gone"
+        android:layout_marginBottom="80dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

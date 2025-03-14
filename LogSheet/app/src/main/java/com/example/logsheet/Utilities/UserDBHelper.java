@@ -123,6 +123,26 @@ public class UserDBHelper extends SQLiteOpenHelper {
         return user; // Returns the user object or null if not found
     }
 
+    public boolean updateUserById(int userId, String username, String gender, int age, float height, float weight) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COLUMN_USERNAME, username);
+        values.put(COLUMN_GENDER, gender);
+        values.put(COLUMN_AGE, age);
+        values.put(COLUMN_HEIGHT, height);
+        values.put(COLUMN_WEIGHT, weight);
+
+        // Update user record
+        int rowsAffected = db.update(TABLE_USER, values, COLUMN_ID + " = ?", new String[]{String.valueOf(userId)});
+
+        db.close();
+
+        // Return true if at least one row was updated, otherwise false
+        return rowsAffected > 0;
+    }
+
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {

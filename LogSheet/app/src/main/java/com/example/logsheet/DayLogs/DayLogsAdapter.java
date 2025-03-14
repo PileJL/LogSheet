@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.logsheet.Logs.LogsItem;
 import com.example.logsheet.R;
+import com.example.logsheet.Utilities.Utility;
 
 import java.util.List;
 
@@ -35,23 +36,18 @@ public class DayLogsAdapter extends RecyclerView.Adapter<DayLogsViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull DayLogsViewHolder holder, int position) {
-        holder.title.setText(items.get(position).getTitle());
+        holder.title.setText(items.get(position).getActivityDesc());
         holder.duration.setText(items.get(position).getDuration());
         holder.intensity.setText(items.get(position).getIntensity());
 
         // change color of intensity based on passed value
-        if (items.get(position).getIntensity().equalsIgnoreCase("Light")) {
-            holder.intensity.setTextColor(ContextCompat.getColor(context, R.color.orange));
-        }
-        else if (items.get(position).getIntensity().equalsIgnoreCase("Moderate")) {
-            holder.intensity.setTextColor(ContextCompat.getColor(context, R.color.yellow));
-        }
-        else if (items.get(position).getIntensity().equalsIgnoreCase("Vigorous")) {
-            holder.intensity.setTextColor(ContextCompat.getColor(context, R.color.green));
-        }
+        Utility.setIntensityColor(context, holder.intensity, items.get(position).getIntensity());
 
         // set onclick of item
         holder.itemContainer.setOnClickListener(v -> listener.onItemClicked(items.get(position)));
+
+        // set onclick of delete button
+        holder.deleteButton.setOnClickListener(v -> listener.onDeleteClicked(items.get(position), context));
     }
 
     @Override

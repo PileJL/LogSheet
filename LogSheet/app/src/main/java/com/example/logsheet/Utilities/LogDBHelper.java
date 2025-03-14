@@ -170,6 +170,48 @@ public class LogDBHelper extends SQLiteOpenHelper {
         }
     }
 
+    public HashMap<String, String> getActivenessDetails(int userId, int year, int month, int week) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT COUNT(DISTINCT day) AS daysLogged, " +
+                "IFNULL(SUM(hourDuration), 0) AS totalHours, " +
+                "COUNT(*) AS totalActivities " +
+                "FROM Logs " +
+                "WHERE userId = ? AND year = ? AND month = ? AND monthWeek = ?";
+
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(userId), String.valueOf(year), String.valueOf(month), String.valueOf(week)});
+
+        int daysLogged = 0;
+        int totalActivities = 0;
+        double totalHours = 0.0;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int daysLoggedIndex = cursor.getColumnIndex("daysLogged");
+            int totalHoursIndex = cursor.getColumnIndex("totalHours");
+            int totalActivitiesIndex = cursor.getColumnIndex("totalActivities");
+
+            if (daysLoggedIndex != -1) {
+                daysLogged = cursor.getInt(daysLoggedIndex);
+            }
+            if (totalHoursIndex != -1) {
+                totalHours = cursor.getDouble(totalHoursIndex);
+            }
+            if (totalActivitiesIndex != -1) {
+                totalActivities = cursor.getInt(totalActivitiesIndex);
+            }
+        }
+
+        cursor.close();
+        db.close();
+
+        HashMap<String, String> activenessDetails = new HashMap<>();
+        activenessDetails.put("daysLogged", String.valueOf(daysLogged));
+        activenessDetails.put("totalActivities", String.valueOf(totalActivities));
+        activenessDetails.put("totalHours", String.valueOf(totalHours));
+
+        return activenessDetails;
+    }
+
     public boolean deleteLogs(int userId, int year, int month, int monthWeek) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -186,6 +228,50 @@ public class LogDBHelper extends SQLiteOpenHelper {
         return rowsDeleted > 0;
     }
 
+    public ArrayList<HashMap<String, String>> getActivityLogs(int userId, int year, int month, int week, int day) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<HashMap<String, String>> logs = new ArrayList<>();
+
+        String query = "SELECT * FROM " + TABLE_LOGS + " WHERE userId = ? AND year = ? AND month = ? AND monthWeek = ? AND day = ? ORDER BY dateAdded DESC";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(userId), String.valueOf(year), String.valueOf(month), String.valueOf(week), String.valueOf(day)});
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> dateMap = new HashMap<>();
+                dateMap.put("id", cursor.getString(0));
+                dateMap.put("userId", cursor.getString(1));
+                dateMap.put("feeling", cursor.getString(2));
+                dateMap.put("activityDesc", cursor.getString(3));
+                dateMap.put("hourDuration", cursor.getString(4));
+                dateMap.put("minuteDuration", cursor.getString(5));
+                dateMap.put("intensity", cursor.getString(6));
+                dateMap.put("questionAnswer1", cursor.getString(7));
+                dateMap.put("questionAnswer2", cursor.getString(8));
+                dateMap.put("questionAnswer3", cursor.getString(9));
+                dateMap.put("questionAnswer4", cursor.getString(10));
+                dateMap.put("questionAnswer5", cursor.getString(11));
+                dateMap.put("questionAnswer6", cursor.getString(12));
+                dateMap.put("questionAnswer7", cursor.getString(13));
+                dateMap.put("dateAdded", cursor.getString(18));
+
+                logs.add(dateMap);
+            } while (cursor.moveToNext());
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+        db.close();
+
+        return logs;
+    }
+
+    public boolean deleteLogById(String logId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsDeleted = db.delete(TABLE_LOGS, "id = ?", new String[]{logId});
+        db.close();
+        return rowsDeleted > 0; // Returns true if at least one row was deleted
+    }
 
     @Override
     public void onOpen(SQLiteDatabase db) {

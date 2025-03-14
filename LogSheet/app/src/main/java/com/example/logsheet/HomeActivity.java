@@ -17,11 +17,15 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.logsheet.Logs.LogsPage;
 import com.example.logsheet.Models.User;
+import com.example.logsheet.Utilities.LogDBHelper;
+import com.example.logsheet.Utilities.UserDBHelper;
 import com.example.logsheet.Utilities.Utility;
 import com.example.logsheet.databinding.ActivityHomeBinding;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -29,6 +33,9 @@ public class HomeActivity extends AppCompatActivity {
     ArrayList<ConstraintLayout> activityContainers;
     ArrayList<TextView> activityTitles;
     User loggedInUser = LoginActivity.loggedInUser;
+    LogDBHelper logDBHelper;
+    String activeness;
+    int month, year, monthWeek;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +50,17 @@ public class HomeActivity extends AppCompatActivity {
         // initializations
         activityContainers = new ArrayList<>(Arrays.asList(binding.activity1, binding.activity2, binding.activity3));
         activityTitles = new ArrayList<>(Arrays.asList(binding.activityTitle1, binding.activityTitle2, binding.activityTitle3));
+        logDBHelper = new LogDBHelper(this);
+            // Get the current date
+        Calendar calendar = Calendar.getInstance();
+        month = calendar.get(Calendar.MONTH) + 1;
+        year = calendar.get(Calendar.YEAR);
+        monthWeek = Math.min(calendar.get(Calendar.WEEK_OF_MONTH), 3); // Limit to 1, 2, or 3
+        activeness = logDBHelper.getActivityLevel(loggedInUser.getId(), year, month, monthWeek);
+        // set activeness text
+        binding.activeness.setText(activeness);
+        // set activeness color
+        Utility.setActivenessColor(getApplicationContext(), binding.activeness, activeness);
 
         // searchbar ontextchanged listener
         binding.searchBar.addTextChangedListener(new TextWatcher() {
@@ -59,8 +77,18 @@ public class HomeActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         });
 
+        // display notif popup
+        displayNotifPopup();
         // overlay onclick
         binding.overlay.setOnClickListener(v -> binding.overlay.setVisibility(View.GONE));
+
+        //set trivia text
+        binding.triviaMessage.setText(Utility.getRandomTrivia());
+
+        // notif overlay onclick
+        binding.notifOverlay.setOnClickListener(v -> {});
+        // trivia overlay onclick
+        binding.triviaOverlay.setOnClickListener(v -> {});
 
         // hamburger icon onclick
         binding.hamburgerIcon.setOnClickListener(v -> binding.overlay.setVisibility(View.VISIBLE));
@@ -107,7 +135,27 @@ public class HomeActivity extends AppCompatActivity {
         // set username
         binding.pageHeader.setText("Hello, "+ loggedInUser.getUsername());
 
+    }
 
+    private void displayNotifPopup() {
+        if (activeness.equalsIgnoreCase("Inactive") || activeness.equalsIgnoreCase("Low Activity")) {
+             // get random exercises
+            ArrayList<String> randomExercises = Utility.getRandomExercises();
+            binding.notifOverlay.setVisibility(View.VISIBLE);
+            HashMap<String, String> activenessDetails = logDBHelper.getActivenessDetails(loggedInUser.getId(), year, month, monthWeek);
+            binding.notifMessage.setText(String.format("It's great to have you back!\nThe result of your physical " +
+                    "activity activeness is that you spent %s engaging in Physical Activity, but unfortunately, you" +
+                    " are still in %s state, doing only %s number of activities for a total of %s days. " +
+                    "This week, you can try these exercises and increase the intensity " +
+                    "to improve your physical activity, as this will help your endurance:",
+                    activenessDetails.get("totalHours"), activeness, activenessDetails.get("totalActivities"), activenessDetails.get("daysLogged")));
+            // set random exercises
+            binding.suggestedPA1.setText(randomExercises.get(0));
+            binding.suggestedPA2.setText(randomExercises.get(1));
+        }
+        else {
+            binding.notifOverlay.setVisibility(View.GONE);
+        }
     }
 
     private void logOut() {

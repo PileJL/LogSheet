@@ -20,7 +20,8 @@ import com.example.logsheet.databinding.ActivityWeekLogsBinding;
 public class WeekLogs extends AppCompatActivity {
 
     ActivityWeekLogsBinding binding;
-
+    String month, year, week;
+    public static String staticDay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,24 +43,28 @@ public class WeekLogs extends AppCompatActivity {
         // Add the callback to the OnBackPressedDispatcher
         getOnBackPressedDispatcher().addCallback(this, callback);
 
+        // get intent data from previous page
+        month = LogsPage.month;
+        year = LogsPage.year;
+        week = LogsPage.weekOfMonth;
+
         // backButton onclick
         binding.backButton.setOnClickListener(v -> goToLogsPage());
 
         // day logs onclicks
-        binding.day1.setOnClickListener(v -> viewDayLogs("Day 1"));
-        binding.day2.setOnClickListener(v -> viewDayLogs("Day 2"));
-        binding.day3.setOnClickListener(v -> viewDayLogs("Day 3"));
-        binding.day4.setOnClickListener(v -> viewDayLogs("Day 4"));
-        binding.day5.setOnClickListener(v -> viewDayLogs("Day 5"));
-        binding.day6.setOnClickListener(v -> viewDayLogs("Day 6"));
-        binding.day7.setOnClickListener(v -> viewDayLogs("Day 7"));
+        binding.day1.setOnClickListener(v -> viewDayLogs("1"));
+        binding.day2.setOnClickListener(v -> viewDayLogs("2"));
+        binding.day3.setOnClickListener(v -> viewDayLogs("3"));
+        binding.day4.setOnClickListener(v -> viewDayLogs("4"));
+        binding.day5.setOnClickListener(v -> viewDayLogs("5"));
+        binding.day6.setOnClickListener(v -> viewDayLogs("6"));
+        binding.day7.setOnClickListener(v -> viewDayLogs("7"));
 
     }
 
     private void viewDayLogs(String day) {
-        Intent intent = new Intent(this, DayLogsPage.class);
-        intent.putExtra("day", day);
-        Utility.navigateToActivity(this, intent);
+        staticDay = day;
+        Utility.navigateToActivity(this, new Intent(this, DayLogsPage.class));
         finish();
     }
 

@@ -43,8 +43,8 @@ import java.util.List;
 public class LogsPage extends AppCompatActivity implements LogsSelectListener{
 
     ActivityLogsPageBinding binding;
-    public static String feeling, activityDesc, intensity;
-    public static int hourDuration, minuteDuration;
+    public static String feeling, activityDesc, intensity, year, month, weekOfMonth;
+    public static int hourDuration, minuteDuration ;
     int userId;
     LogDBHelper dbHelper;
     List<LogsItem> items;
@@ -203,6 +203,9 @@ public class LogsPage extends AppCompatActivity implements LogsSelectListener{
 
     @Override
     public void onItemClicked(LogsItem item) {
+        year = String.valueOf(item.getYear());
+        month = String.valueOf(item.getMonth());
+        weekOfMonth = String.valueOf(item.getWeek());
         Utility.navigateToActivity(this, new Intent(this, WeekLogs.class));
     }
 
