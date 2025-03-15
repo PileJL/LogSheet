@@ -48,6 +48,9 @@ public class WeekLogs extends AppCompatActivity {
         year = LogsPage.year;
         week = LogsPage.weekOfMonth;
 
+        // set page title
+        binding.pageTitle.setText(Utility.getMonthName(Integer.parseInt(month)) + " " + year + " - Week " + week);
+
         // backButton onclick
         binding.backButton.setOnClickListener(v -> goToLogsPage());
 

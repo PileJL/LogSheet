@@ -49,8 +49,12 @@ public class HomeActivity extends AppCompatActivity {
             return insets;
         });
         // initializations
-        activityContainers = new ArrayList<>(Arrays.asList(binding.activity1, binding.activity2, binding.activity3));
-        activityTitles = new ArrayList<>(Arrays.asList(binding.activityTitle1, binding.activityTitle2, binding.activityTitle3));
+        activityContainers = new ArrayList<>(Arrays.asList(binding.activity1, binding.activity2, binding.activity3,
+                binding.activity4, binding.activity5, binding.activity6, binding.activity7, binding.activity8,
+                binding.activity9, binding.activity10, binding.activity11));
+        activityTitles = new ArrayList<>(Arrays.asList(binding.activityTitle1, binding.activityTitle2, binding.activityTitle3,
+                binding.activityTitle4, binding.activityTitle5, binding.activityTitle6, binding.activityTitle7, binding.activityTitle8,
+                binding.activityTitle9, binding.activityTitle10, binding.activityTitle11));
         logDBHelper = new LogDBHelper(this);
             // Get the current date
         Calendar calendar = Calendar.getInstance();

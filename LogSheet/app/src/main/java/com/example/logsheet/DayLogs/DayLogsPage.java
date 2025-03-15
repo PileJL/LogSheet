@@ -69,6 +69,7 @@ public class DayLogsPage extends AppCompatActivity implements DayLogsSelectListe
         day = WeekLogs.staticDay;
 
         // set page title
+        binding.pageTitle.setText(Utility.getMonthName(Integer.parseInt(month)) + " " + year + " - Week " + week);
         binding.day.setText("Day " + day);
 
         // get day logs
